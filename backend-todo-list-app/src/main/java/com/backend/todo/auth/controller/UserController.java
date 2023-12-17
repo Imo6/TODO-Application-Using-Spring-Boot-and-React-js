@@ -62,5 +62,11 @@ public class UserController {
     public ResponseEntity<UserSignupResponse> signup(@Valid @RequestBody UserSignupRequest userSignupRequest) {
 		return new ResponseEntity<>(userService.signup(userSignupRequest), HttpStatus.OK);
     }
+
+	@ResponseStatus(code = HttpStatus.OK)
+	@RequestMapping(value = "/api/auth", method = RequestMethod.GET)
+	public String testing() {
+		return "Thank you, End Points are working fine!!!";
+	}
 }
 

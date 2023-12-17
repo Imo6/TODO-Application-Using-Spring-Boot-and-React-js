@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useHistory } from "react-router-dom"; 
+import API_URL from '../apiConfig';
 
 function UpdateTodo({isAuthenticated, setIsAuthenticated, match}) {
 	const [title, setTitle] = useState('');
@@ -24,7 +25,7 @@ function UpdateTodo({isAuthenticated, setIsAuthenticated, match}) {
     e.preventDefault();
   
     try {
-      await axios.put(`http://localhost:9090/api/todo/${match.params.id}`, {title, targetDate}, {
+      await axios.put(`${API_URL}/api/todo/${match.params.id}`, {title, targetDate}, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`
         }
@@ -49,7 +50,7 @@ function UpdateTodo({isAuthenticated, setIsAuthenticated, match}) {
     const loadData = async () => {
       let response = null;
       try {
-        response = await axios.get(`http://localhost:9090/api/todo/${match.params.id}`, {
+        response = await axios.get(`${API_URL}/api/todo/${match.params.id}`, {
           headers: {
 						'Authorization': `Bearer ${sessionStorage.getItem('token')}`
 					}

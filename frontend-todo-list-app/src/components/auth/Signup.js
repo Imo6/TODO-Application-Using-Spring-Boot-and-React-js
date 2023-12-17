@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import API_URL from '../apiConfig';
 
 function Signup({ isAuthenticated, setIsAuthenticated }) {
   const [name, setName] = useState('');
@@ -54,7 +55,7 @@ function Signup({ isAuthenticated, setIsAuthenticated }) {
     }
 
     try {
-      const response = await axios.post('http://localhost:9090/api/auth/signup', {
+      const response = await axios.post(`${API_URL}/api/auth/signup`, {
         name,
         username,
         password,

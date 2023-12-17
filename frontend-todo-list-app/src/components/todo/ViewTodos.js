@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useHistory } from "react-router-dom"; 
+import API_URL from '../apiConfig';
 
 function Todos({isAuthenticated, setIsAuthenticated}) {
 	const [todos, setTodos] = useState([]);
@@ -25,12 +26,12 @@ function Todos({isAuthenticated, setIsAuthenticated}) {
 		const loadData = async () => {
 			let response = null;
 			try {
-				let url = `http://localhost:9090/api/todo/${pageNumber - 1}/${pageSize}`;
+				let url = `${API_URL}/api/todo/${pageNumber - 1}/${pageSize}`;
 
 				if(filter === 'Completed'){
-					url = `http://localhost:9090/api/todo/${pageNumber - 1}/${pageSize}?isCompleted=true`;
+					url = `${API_URL}/api/todo/${pageNumber - 1}/${pageSize}?isCompleted=true`;
 				} else if(filter === 'Not Completed'){
-					url = `http://localhost:9090/api/todo/${pageNumber - 1}/${pageSize}?isCompleted=false`;
+					url = `${API_URL}/api/todo/${pageNumber - 1}/${pageSize}?isCompleted=false`;
 				}
 				
 				response = await axios.get(url, {headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`,}});
@@ -130,7 +131,7 @@ function Todos({isAuthenticated, setIsAuthenticated}) {
 
 	const markCompleted = async (id) => {
 		try {
-      await axios.put(`http://localhost:9090/api/todo/${id}/markcomplete`, {}, {
+      await axios.put(`${API_URL}/api/todo/${id}/markcomplete`, {}, {
 				headers: {
 					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
 				}
@@ -149,7 +150,7 @@ function Todos({isAuthenticated, setIsAuthenticated}) {
 
 	const deleteTodo = async (id) => {
 		try {
-      await axios.delete(`http://localhost:9090/api/todo/${id}`, {
+      await axios.delete(`${API_URL}/api/todo/${id}`, {
 				headers: {
 					'Authorization': `Bearer ${sessionStorage.getItem('token')}`
 				}

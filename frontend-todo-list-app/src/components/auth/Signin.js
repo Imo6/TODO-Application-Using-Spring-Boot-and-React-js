@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import API_URL from '../apiConfig';
 
 function Signin({ isAuthenticated, setIsAuthenticated }) {
   const [username, setUsername] = useState('');
@@ -17,7 +18,8 @@ function Signin({ isAuthenticated, setIsAuthenticated }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:9090/api/auth/signin', { username, password });
+      // Concatenate API_URL with the endpoint
+      const response = await axios.post(`${API_URL}/api/auth/signin`, { username, password });
       sessionStorage.setItem('token', response.data.token);
       sessionStorage.setItem('name', response.data.username);
       setIsAuthenticated(true);
@@ -102,5 +104,3 @@ function Signin({ isAuthenticated, setIsAuthenticated }) {
 }
 
 export default Signin;
-
-

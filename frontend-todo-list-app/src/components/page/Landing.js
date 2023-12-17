@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import API_URL from '../apiConfig';
 
 export default function Landing({isAuthenticated, setIsAuthenticated}) {
   const [message, setMessage] = useState('')
@@ -20,7 +21,7 @@ export default function Landing({isAuthenticated, setIsAuthenticated}) {
   useEffect(() => {
     async function getAndSetNumberAllTodo() {
       try{
-        const response = await axios.get('http://localhost:9090/api/todo/count', {
+        const response = await axios.get(`${API_URL}/api/todo/count`, {
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           }
@@ -38,7 +39,7 @@ export default function Landing({isAuthenticated, setIsAuthenticated}) {
 
     async function getAndSetNumberAllTodoNotCompleted() {
       try{
-        const response = await axios.get('http://localhost:9090/api/todo/count?isCompleted=false', {
+        const response = await axios.get(`${API_URL}/api/todo/count?isCompleted=false`, {
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
           }

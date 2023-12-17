@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom"; 
+import API_URL from '../apiConfig';
 
 function AddTodo({isAuthenticated, setIsAuthenticated}) {
 	const [title, setTitle] = useState('');
@@ -19,7 +20,7 @@ function AddTodo({isAuthenticated, setIsAuthenticated}) {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:9090/api/todo', {title, targetDate}, {
+      await axios.post(`${API_URL}/api/todo`, {title, targetDate}, {
         headers: {
           'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         }
